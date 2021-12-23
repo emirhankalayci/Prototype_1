@@ -6,10 +6,14 @@ public class PlayerController : MonoBehaviour
 {
    // Private variables
 
-    private float speed = 5.0f;
-    private float turnSpeed = 25.0f;
+    private float speed = 10.0f;
+    private float turnSpeed = 50.0f;
     private float horizontalInput;
     private float verticalInput;
+    public Camera mainCamera;
+    public Camera FrontViewCamera;
+    public KeyCode switchKey;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +32,12 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
         // We turn the vehicle
         transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
+
+        if (Input.GetKeyDown(switchKey))
+        {
+            mainCamera.enabled = !mainCamera.enabled;
+            FrontViewCamera.enabled = !FrontViewCamera.enabled;
+        }
+
     }
 }
